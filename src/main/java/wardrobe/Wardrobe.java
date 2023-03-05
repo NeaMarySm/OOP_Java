@@ -2,10 +2,11 @@ package wardrobe;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Objects;
 
 public class Wardrobe {
     private ArrayList<Shelf> shelves = new ArrayList<>();
-    private int height;
+    private int height; // все размеры в см
     private int width;
     private int depth;
     public boolean isOpened = false;
@@ -64,14 +65,14 @@ public class Wardrobe {
     public Cloth findCloth(String model) {
         for (Shelf shelf : shelves) {
             for (Cloth cloth : shelf.stored) {
-                if (cloth.getModel() == model) {
+                if (Objects.equals(cloth.getModel(), model)) {
                     return cloth;
                 }
             }
         }
+        System.out.println("No such cloth stored");
         return null;
     }
-
 
     public boolean unstore(Cloth cloth) {
         if (isOpened) {
@@ -86,11 +87,26 @@ public class Wardrobe {
         return false;
     }
 
+    public void showAll() {
+        for (int i = 0; i < shelves.size(); i++) {
+            if (!shelves.get(i).isEmpty()) {
+                shelves.get(i).showStored();
+            }
+        }
+    }
+    public int getCapacity(){
+        System.out.println(shelves.size()+" shelves with capacity "+shelves.get(0).getMaxCapacity());
+        int total = shelves.size()*shelves.get(0).getMaxCapacity();
+        System.out.println("Total space: "+ total);
+        return total;
+    }
+
 
     class Shelf {
         private int height;
         private int width;
         private int depth;
+
         private int maxCapacity;
         private LinkedList<Cloth> stored = new LinkedList<>();
         private boolean isFull = false;
@@ -99,15 +115,21 @@ public class Wardrobe {
             this.height = height;
             this.width = width;
             this.depth = depth;
-            maxCapacity = countVolume() / 10000;
+            maxCapacity = countVolume() / 10000; // 10000 ориентировочный объем 1 предмета в см3
+            // если избавиться от магического числа, можно будет не привязываться к см
         }
 
         public int getHeight() {
             return height;
         }
-
+        public int getMaxCapacity() {
+            return maxCapacity;
+        }
         public boolean isFull() {
             return isFull;
+        }
+        public boolean isEmpty() {
+            return stored.size() == 0;
         }
 
         public int countVolume() {

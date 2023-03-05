@@ -12,22 +12,30 @@ public class Man {
             wardrobe.open();
         }
     }
+
     public void closeDoors(Wardrobe wardrobe) {
         if (wardrobe.isOpened) {
             wardrobe.close();
         }
     }
-    public boolean store(Wardrobe wardrobe, Cloth cloth){
+
+    public boolean store(Wardrobe wardrobe, Cloth cloth) {
         openDoors(wardrobe);
         boolean result = wardrobe.store(cloth);
         closeDoors(wardrobe);
-        if(result){
+        if (result) {
             System.out.println("Successfully stored!");
         }
         return result;
     }
-    public Cloth getCloth(Wardrobe wardrobe, String clothModel){
+
+    public Cloth getCloth(Wardrobe wardrobe, String clothModel) {
+        openDoors(wardrobe);
         Cloth cloth = wardrobe.findCloth(clothModel);
+        if (!(cloth == null)) {
+            wardrobe.unstore(cloth);
+        }
+        closeDoors(wardrobe);
         return cloth;
     }
 }
