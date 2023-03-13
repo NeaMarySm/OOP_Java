@@ -35,7 +35,7 @@ public class Person {
 
     @Override
     public String toString() {
-        return String.format("\n%s %s, %s, age: %d", firstName, lastName, gender, getAge());
+        return String.format("%s %s, %s, age: %d", firstName, lastName, gender, getAge());
     }
     public boolean equals(Person person){
         return firstName.equals(person.getFirstName()) && lastName.equals(person.getLastName()) && person.getBirthYear() == birthYear;
