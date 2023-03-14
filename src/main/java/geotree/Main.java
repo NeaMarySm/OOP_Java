@@ -1,7 +1,9 @@
 package geotree;
 
+import java.io.IOException;
+
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Person irina = new Person("Ирина","Иванова",1970 ,Gender.female);
         Person vasya = new Person("Вася","Иванов",1990 ,Gender.male);
         Person masha = new Person("Маша","Сидорова",1995 ,Gender.female);
@@ -10,7 +12,7 @@ public class Main {
         Person sasha = new Person("Саша","Сидоров",1990 ,Gender.male);
         Person dima = new Person("Дима","Сидоров",2020 ,Gender.male);
         Person lena = new Person("Лена","Григорьева",1949 ,Gender.female);
-        System.out.println(irina);
+//        System.out.println(irina);
         GeoTree gt = new GeoTree();
         gt.append(irina, vasya);
         gt.append(irina, masha);
@@ -21,10 +23,12 @@ public class Main {
         gt.append(lena,irina);
         Research rs1 = new Research(gt);
 
-        System.out.println(rs1.getDescendants(irina));
-        System.out.println(rs1.getAncestors(ivan));
-        System.out.println(rs1.spend(masha, Relationship.parent));
-        System.out.println(rs1.getClosest(vasya));
+        rs1.spend(vasya, Relationship.parent);
+        rs1.createFile();
+        rs1.spend(masha);
+        rs1.createFile();
+        rs1.spend(irina,true);
+        rs1.createFile();
     }
 
 }
