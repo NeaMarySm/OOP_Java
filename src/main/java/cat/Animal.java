@@ -2,20 +2,23 @@ package cat;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Iterator;
 
-public abstract class Animal {
+public abstract class Animal implements Iterator<String> {
     protected String name;
     protected int birthYear;
     protected String breed;
     protected Nutrition nutrition;
     protected boolean isWild;
     protected ArrayList<String> foodList = new ArrayList<>();
+    int index;
 
 
     public Animal(String name, String breed, int birthYear) {
         this.name = name;
         this.birthYear = birthYear;
         this.breed = breed;
+        index = 0;
     }
 
     public String getName() {
@@ -45,6 +48,7 @@ public abstract class Animal {
     public boolean isWild() {
         return isWild;
     }
+
     public void setWild(boolean wild) {
         isWild = wild;
     }
@@ -74,10 +78,36 @@ public abstract class Animal {
             return false;
         }
     }
+
     public void sleep() {
         System.out.println(name + " sleeps");
     }
+
     public abstract void voice();
 
+    @Override
+    public boolean hasNext() {
+        return index < 6;
+    }
 
+    @Override
+    public String next() {
+        switch (index++) {
+            case 0:
+                return String.format("%s", this);
+            case 1:
+                return String.format("Age %d", this.getAge());
+            case 2:
+                return String.format("Breed %s", this.breed);
+            case 3:
+                return String.format("Eats %s-food", this.nutrition);
+            case 4:
+                return this.isWild ? "Wild" : "Domestic";
+            case 5:
+                return String.format("Diet: %s", this.foodList.toString());
+            default:
+                return "";
+
+        }
+    }
 }
