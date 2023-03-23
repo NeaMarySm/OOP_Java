@@ -28,24 +28,6 @@ public class CSVExporter<T extends BaseTask> extends FileExporter<T> implements 
         fw.close();
     }
 
-    public void exportNew() {
-        StringBuilder sb = new StringBuilder();
-        try (PrintWriter writer = new PrintWriter(new File("res.csv"))) {
-
-            for (T task : tasks) {
-                while (task.hasNext()) {
-                    sb.append(task.next());
-                    sb.append(";");
-                }
-                sb.append("\n");
-            }
-            writer.write(sb.toString());
-            writer.close();
-            System.out.println("Файл записан");
-        } catch (FileNotFoundException e) {
-            System.out.println(e.getMessage());
-        }
-    }
 
     public String createFormattedLine(T task) {
         StringBuilder sb = new StringBuilder();

@@ -13,7 +13,6 @@ public class TaskHandler {
     private TaskView tw;
     private Storage<PriorityTask> priorityTaskStorage;
     private Storage<SimpleTask> simpleTaskStorage;
-    private ArrayList<BaseTask> result = new ArrayList<>();
     private User user;
 
     public TaskHandler(User user, Storage<PriorityTask> priorityTaskStorage, Storage<SimpleTask> simpleTaskStorage) {
@@ -26,7 +25,6 @@ public class TaskHandler {
     public PriorityTask createPriorityTask() {
         return new PriorityTask(tw.getTitle(), user, tw.getDeadline(), tw.getPriority());
     }
-
 
     public SimpleTask createSimpleTask() {
         return new SimpleTask(tw.getTitle(), user, tw.getContent());
@@ -57,8 +55,18 @@ public class TaskHandler {
             tw.print(simpleTaskStorage.getTasks().get(i));
         }
     }
-    public ArrayList<BaseTask> filterByPriority(){
-        priorityTaskStorage.getTasks().sort(new PriorityComparator());
+
+    public void print(ArrayList<PriorityTask> taskList, String title) {
+        System.out.println("\n" + title);
+        for (int i = 0; i < taskList.size(); i++) {
+            System.out.printf("%d\t", (i + 1));
+            tw.print(taskList.get(i));
+        }
+    }
+
+    public ArrayList<PriorityTask> filterByPriority() {
+        ArrayList<PriorityTask> result = (ArrayList<PriorityTask>) priorityTaskStorage.getTasks().clone();
+        result.sort(new PriorityComparator());
         return result;
     }
 

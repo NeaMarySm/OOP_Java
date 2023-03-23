@@ -18,8 +18,8 @@ public class PriorityTask extends BaseTask implements Iterator<String> {
         this.priority = priority;
     }
 
-    public PriorityTask(UUID id, String title, User author,LocalDateTime createdAt, LocalDateTime deadline, State state, Priority priority) {
-        super(id, title,createdAt, author);
+    public PriorityTask(UUID id, String title, User author, LocalDateTime createdAt, LocalDateTime deadline, State state, Priority priority) {
+        super(id, title, createdAt, author);
         this.deadline = deadline;
         this.state = state;
         this.priority = priority;
@@ -83,9 +83,10 @@ public class PriorityTask extends BaseTask implements Iterator<String> {
     }
 
     @Override
-    public int hashCode(){
+    public int hashCode() {
         return super.hashCode();
     }
+
     @Override
     public boolean equals(Object o) {
         if (o == null) {

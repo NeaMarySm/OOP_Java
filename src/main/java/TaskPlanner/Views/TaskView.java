@@ -14,12 +14,13 @@ public class TaskView extends View {
     }
 
     public void print(SimpleTask task) {
-        System.out.printf("%s\t%s\t%s\t%s", task.getTitle(), task.getContent(),task.getCreatedAt(), task.getAuthor());
+        System.out.printf("%s\t%s\t%s\t%s\n", task.getTitle(), task.getContent(), task.getCreatedAt(), task.getAuthor());
     }
+
     public void print(PriorityTask task) {
         System.out.printf("%s\t%s\t%s\t%s\t%s\t%s\n",
-                task.getTitle(), task.getPriority(),task.getDeadline(),
-                task.getState(),task.getCreatedAt(), task.getAuthor());
+                task.getTitle(), task.getPriority(), task.getDeadline(),
+                task.getState(), task.getCreatedAt(), task.getAuthor());
     }
 
     public String getTitle() {
@@ -57,12 +58,12 @@ public class TaskView extends View {
         while (true) {
             switch (input.toLowerCase()) {
                 case "high":
-                    priority= Priority.high;
+                    priority = Priority.high;
                     break;
                 case "medium":
                     break;
                 case "low":
-                    priority= Priority.low;
+                    priority = Priority.low;
                     break;
                 default:
                     System.out.println("Invalid input");

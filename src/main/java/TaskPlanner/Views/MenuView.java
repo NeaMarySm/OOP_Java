@@ -3,14 +3,15 @@ package TaskPlanner.Views;
 import TaskPlanner.Menu;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class MenuView extends View {
     private Menu menu;
+
     public MenuView(Menu menu) {
         super();
         this.menu = menu;
     }
+
     public Menu getMenu() {
         return menu;
     }
@@ -18,10 +19,12 @@ public class MenuView extends View {
     public void setMenu(Menu menu) {
         this.menu = menu;
     }
+
     public void print(ArrayList<String> commands) {
         commands.forEach(el -> System.out.printf("%s\t", el));
     }
-    public int getMainMenuChoice(){
+
+    public int getMainMenuChoice() {
         System.out.println("Main menu");
         menu.print(menu.getMainMenu());
         System.out.println("\nEnter command: ");
@@ -29,7 +32,8 @@ public class MenuView extends View {
         in.nextLine();
         return input;
     }
-    public int getFilterChoice(){
+
+    public int getFilterChoice() {
         System.out.println("Choose filter:");
         menu.print(menu.getSubFilter());
         System.out.println("Enter command: ");
@@ -38,7 +42,7 @@ public class MenuView extends View {
         return input;
     }
 
-    public int getShowChoice(){
+    public int getShowChoice() {
         System.out.println("Show All Tasks?");
         menu.print(menu.getSubShow());
         System.out.println("Enter command: ");
@@ -46,7 +50,8 @@ public class MenuView extends View {
         in.nextLine();
         return input;
     }
-    public String getFilename(){
+
+    public String getFilename() {
         System.out.println("Enter filename:");
         return in.nextLine();
     }

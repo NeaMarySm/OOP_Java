@@ -2,9 +2,9 @@ package TaskPlanner.Tasks;
 
 public enum State {
     created,
-//    inWork,
+    inWork,
     completed,
-//    deleted,
-//    delayed
+    deleted,
+    delayed
 
 }

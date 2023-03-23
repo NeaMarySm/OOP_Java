@@ -1,15 +1,12 @@
 package TaskPlanner;
 
 import TaskPlanner.FileHandlers.Export.CSVExporter;
-import TaskPlanner.FileHandlers.Import.CSVImporter;
 import TaskPlanner.FileHandlers.Import.CSVPriorityImporter;
-import TaskPlanner.Menu;
 import TaskPlanner.Tasks.PriorityTask;
 import TaskPlanner.Tasks.SimpleTask;
 import TaskPlanner.Views.MenuView;
 
 import java.io.IOException;
-import java.util.Scanner;
 
 public class Program {
     private MenuView menu;
@@ -82,29 +79,9 @@ public class Program {
                             taskHandler.printAll();
                             break;
                         case 2:
-                            input = menu.getFilterChoice();
-                            switch (input) {
-                                case 1:
-                                    //Вывод фильтрованных по приоритету
-                                    break;
-                                case 2:
-                                    //фильтрация по дедлайну
-                                    break;
-                                case 3:
-                                    //по дате создания
-                                    break;
-                                case 4:
-                                    //по автору
-                                    break;
-                                case 0:
-                                    // возврат в главное меню
-                                    break;
-                                default:
-                                    System.out.println("Invalid command.");
-                            }
+                            taskHandler.print(taskHandler.filterByPriority(), "Filtered by priority");
                             break;
                         case 0:
-                            // возврат в главное меню
                             break;
                         default:
                             System.out.println("Invalid command.");

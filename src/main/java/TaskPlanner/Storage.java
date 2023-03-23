@@ -5,7 +5,7 @@ import TaskPlanner.Tasks.BaseTask;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class Storage<T extends BaseTask>{
+public class Storage<T extends BaseTask> {
     private ArrayList<T> tasks = new ArrayList<>();
     private String name;
 
@@ -29,29 +29,34 @@ public class Storage<T extends BaseTask>{
         this.name = name;
     }
 
-    public boolean add(T task){
+    public boolean add(T task) {
         return tasks.add(task);
     }
-    public boolean remove(T task){
+
+    public boolean remove(T task) {
         return tasks.remove(task);
     }
-    public boolean addList(ArrayList<T> taskList){
+
+    public boolean addList(ArrayList<T> taskList) {
         return tasks.addAll(taskList);
     }
-    public int size(){
+
+    public int size() {
         return tasks.size();
     }
-    public T get(UUID id){
-        for (T t:tasks) {
-            if(t.getId().equals(id)){
+
+    public T get(UUID id) {
+        for (T t : tasks) {
+            if (t.getId().equals(id)) {
                 return t;
             }
         }
         System.out.println("Task not found");
         return null;
     }
+
     @Override
-    public String toString(){
+    public String toString() {
         return name;
     }
 }
