@@ -2,6 +2,7 @@ package phonebook;
 
 import phonebook.controller.ContactController;
 import phonebook.controller.MenuController;
+import phonebook.controller.PhonebookNavigationController;
 
 import java.io.IOException;
 
@@ -22,13 +23,14 @@ public class Program {
             switch (input) {
                 case 1:
                     boolean inContacts = true;
-                    System.out.println(contactController.getCurrentContact());
+                    PhonebookNavigationController nav = new PhonebookNavigationController(this.contactController.getPhonebook(), this.contactController.getView());
+                    System.out.println(nav.getCurrentContact());
                     while (inContacts) {
                         input = menuController.navigateChoice();
                         if (input == 1) {
-                            System.out.println(contactController.previousContact());
+                            System.out.println(nav.previousContact());
                         } else if (input == 2) {
-                            System.out.println(contactController.nextContact());
+                            System.out.println(nav.nextContact());
                         } else {
                             System.out.println("Invalid input");
                             inContacts = false;
@@ -39,10 +41,10 @@ public class Program {
                     contactController.createContact();
                     break;
                 case 3:
-                    contactController.importContacts();
+                    contactController.importCSV();
                     break;
                 case 4:
-                    contactController.exportContacts();
+                    contactController.exportCSV();
                     break;
                 case 0:
                     inProgress = false;

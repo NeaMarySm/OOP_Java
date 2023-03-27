@@ -4,13 +4,13 @@ import java.time.LocalDate;
 import java.util.Iterator;
 import java.util.UUID;
 
-public class Contact implements Iterator<String> {
-    private UUID id;
-    private String firstName;
-    private String lastName;
-    private String phone;
-    private LocalDate creationDate;
-    private int index = 0;
+public class Contact implements Iterator<String>{
+    protected UUID id;
+    protected String firstName;
+    protected String lastName;
+    protected String phone;
+    protected LocalDate creationDate;
+    protected int index = 0;
 
 
     public Contact(String firstName, String lastName, String phone) {
@@ -21,7 +21,7 @@ public class Contact implements Iterator<String> {
         this.creationDate = LocalDate.now();
     }
 
-    public Contact(UUID id, String firstName, String lastName, String phone, LocalDate creationDate) {
+    public Contact(UUID id, String firstName, String lastName, LocalDate creationDate, String phone) {
         this(firstName, lastName, phone);
         this.id = id;
         this.creationDate = creationDate;
@@ -57,11 +57,6 @@ public class Contact implements Iterator<String> {
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    @Override
-    public int hashCode() {
-        return super.hashCode();
     }
 
     @Override

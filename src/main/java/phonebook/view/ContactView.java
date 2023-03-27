@@ -23,6 +23,12 @@ public class ContactView extends View{
         System.out.print("Phone: ");
         return in.nextLine();
     }
+    public int getInput() {
+        System.out.print("Enter command: ");
+        int input =  in.nextInt();
+        in.nextLine();
+        return input;
+    }
 
     public void setPhone(String value) {
         System.out.printf("Phone changed to: %s\n", value);

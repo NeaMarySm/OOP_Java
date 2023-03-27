@@ -1,18 +1,24 @@
 package phonebook.controller;
 
 import phonebook.model.Contact;
+import phonebook.model.MultipleContact;
 import phonebook.model.PhoneBook;
+import phonebook.service.PhoneBookIterator;
+import phonebook.service.exporter.CsvExporter;
+import phonebook.service.importer.CsvImporter;
 import phonebook.view.ContactView;
 
 import java.io.IOException;
 
 public class ContactController {
-    private PhoneBook phonebook;
-    private ContactView view;
+    protected PhoneBook phonebook;
+    protected PhoneBookIterator iterator;
+    protected ContactView view;
 
     public ContactController(PhoneBook phonebook, ContactView view) {
         this.phonebook = phonebook;
         this.view = view;
+        this.iterator = new PhoneBookIterator(this.phonebook);
     }
 
     public PhoneBook getPhonebook() {
@@ -31,26 +37,31 @@ public class ContactController {
         this.view = view;
     }
 
-    public boolean createContact(){
-        return phonebook.addContact(new Contact(view.getFirstName(), view.getLastName(), view.getPhone()));
+    public void createContact() {
+        String firstname = view.getFirstName();
+        String lastname = view.getLastName();
+        String phone = view.getPhone();
+        Contact newContact = new MultipleContact(firstname, lastname, phone);
+        boolean in = true;
+        while (in) {
+            System.out.println("Add more numbers?\n1-Yes\t2-No\n");
+            int input = view.getInput();
+            if (input == 1) {
+                ((MultipleContact) newContact).addPhone(view.getPhone());
+            } else {
+                in = false;
+            }
+        }
+        phonebook.addContact(newContact);
     }
-    public Contact getCurrentContact(){
-        return phonebook.getCurrentContact();
-    }
-    public Contact nextContact(){
-        phonebook.nextIndex();
-        return phonebook.getCurrentContact();
-    }
-    public Contact previousContact(){
-        phonebook.previousIndex();
-        return phonebook.getCurrentContact();
-    }
-    public void importContacts() throws IOException {
+
+    public void importCSV() throws IOException {
         String file = view.getFilename();
-        phonebook.importCSV(file);
+        new CsvImporter(phonebook.getPhonebook()).importFile(file);
     }
-    public void exportContacts() throws IOException {
-        phonebook.exportCSV();
+
+    public void exportCSV() throws IOException {
+        new CsvExporter(phonebook.getPhonebook()).export();
     }
 
 
